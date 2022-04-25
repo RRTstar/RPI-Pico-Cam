@@ -142,11 +142,13 @@ target_sources(person_detection_int8
   ${CMAKE_CURRENT_LIST_DIR}/main_functions.cpp
   ${CMAKE_CURRENT_LIST_DIR}/model_settings.cpp
   ${CMAKE_CURRENT_LIST_DIR}/tensorflow/lite/micro/tools/make/downloads/person_model_int8/person_detect_model_data.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/tensorflow/lite/micro/tools/make/downloads/conv_mnist/conv_mnist_quant.cpp
   ${CMAKE_CURRENT_LIST_DIR}/detection_responder.h
   ${CMAKE_CURRENT_LIST_DIR}/image_provider.h
   ${CMAKE_CURRENT_LIST_DIR}/main_functions.h
   ${CMAKE_CURRENT_LIST_DIR}/model_settings.h
   ${CMAKE_CURRENT_LIST_DIR}/person_detect_model_data.h
+  ${CMAKE_CURRENT_LIST_DIR}/conv_mnist_quant.h
 )
 
 target_link_libraries(

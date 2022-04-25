@@ -19,6 +19,7 @@ limitations under the License.
 #include "image_provider.h"
 #include "model_settings.h"
 #include "person_detect_model_data.h"
+// #include "conv_mnist_quant.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
@@ -140,6 +141,7 @@ void setup() {
   // Map the model into a usable data structure. This doesn't involve any
   // copying or parsing, it's a very lightweight operation.
   model = tflite::GetModel(g_person_detect_model_data);
+  // model = tflite::GetModel(conv_mnist_quant_tflite);
   if (model->version() != TFLITE_SCHEMA_VERSION) {
     TF_LITE_REPORT_ERROR(error_reporter,
                          "Model provided is schema version %d not equal "
@@ -200,6 +202,25 @@ void loop() {
   TF_LITE_MICRO_EXECUTION_TIME_SNIPPET_END(error_reporter, "Invoke")
 
   TfLiteTensor* output = interpreter->output(0);
+
+	/* Show result */
+	int32_t maxIndex = 0;
+	float maxScore = 0;
+	// for(int32_t i = 0; i < 10; i++) {;
+	// 	float score = (output->data.int8[i] - output->params.zero_point) * output->params.scale;
+	// 	char text[10];
+	// 	snprintf(text, sizeof(text), "%d:%.2f", i, score);
+  //   TF_LITE_REPORT_ERROR(error_reporter, text);
+	// 	// printf("%s\n", text);
+
+	// 	if (score > maxScore) {
+	// 		maxScore = score;
+	// 		maxIndex = i;
+	// 	}
+	// }
+	// char text[10];
+	// snprintf(text, sizeof(text), "* %d *", maxIndex);
+  // TF_LITE_REPORT_ERROR(error_reporter, text);
 
   // Process the inference results.
   int8_t person_score = output->data.uint8[kPersonIndex];
